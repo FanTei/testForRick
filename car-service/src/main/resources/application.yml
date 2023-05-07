@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: car-service
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car_db
+    username: postgres
+    password: postgres
+server:
+  port: 9090
+springdoc:
+  swagger-ui:
+    operations-sorter: method

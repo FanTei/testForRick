@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+  car-service:
+    build:
+      context: car-service
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+  driver-service:
+    build:
+      context: driver-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+networks:
+  postgres:
+    driver: bridge
+  backend:
+    driver: bridge
+volumes:
+  postgres:
+  pgadmin:

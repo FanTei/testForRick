@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: driver-service
+  jpa:
+    hibernate:
+      ddl-auto: create
+  datasource:
+    url: jdbc:postgresql://localhost:5432/car_db
+    username: postgres
+    password: postgres
+server:
+  port: 8080
+
