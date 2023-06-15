@@ -19,4 +19,9 @@ public class Account {
 
     @Column(name = "driver_id")
     private long driverId;
+
+    public Account(double countInRed, long driverId) {
+        this.countInRed = countInRed;
+        this.driverId = driverId;
+    }
 }

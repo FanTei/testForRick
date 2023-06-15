@@ -3,7 +3,7 @@ package ric.masters.carservice.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ric.masters.carservice.entiry.Driver;
+import ric.masters.carservice.entity.Driver;
 import ric.masters.carservice.service.DriverService;
 
 import java.util.Date;
@@ -17,6 +17,11 @@ public class DriverController {
         this.driverService = driverService;
     }
 
+    @GetMapping("id/{driverId}")
+    public Driver getDriverById(@PathVariable long driverId) {
+        return driverService.getDriverById(driverId);
+    }
+
     @GetMapping
     public ResponseEntity<?> getAllDrivers() {
         try {
@@ -27,7 +32,7 @@ public class DriverController {
     }
 
     @GetMapping("birthDay/{birthDay}")
-    public ResponseEntity<?> getDriversByBirthday(@PathVariable Date birthDay) {
+    public ResponseEntity<?> getDriversByBirthday(@PathVariable String birthDay) {
         try {
             return new ResponseEntity<>(driverService.getDriversByBirthday(birthDay), HttpStatus.OK);
         } catch (Exception e) {
@@ -35,10 +40,6 @@ public class DriverController {
         }
     }
 
-    @GetMapping("id/{id}")
-    public Driver getDriverById(@PathVariable long id) {
-        return driverService.getDriverById(id);
-    }
 
     @PostMapping
     public ResponseEntity<?> createDriver(@RequestBody Driver driver) {

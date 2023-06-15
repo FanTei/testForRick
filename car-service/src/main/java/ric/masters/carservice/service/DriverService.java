@@ -1,7 +1,8 @@
 package ric.masters.carservice.service;
 
-import ric.masters.carservice.entiry.Driver;
+import ric.masters.carservice.entity.Driver;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface DriverService {
 
     Driver getDriverById(long driverId);
 
-    List<Driver> getDriversByBirthday(Date birthday);
+    List<Driver> getDriversByBirthday(String birthday) throws ParseException;
 
     Driver createDriver(Driver driver);
 

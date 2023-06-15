@@ -1,13 +1,11 @@
 package ric.masters.carservice.service;
 
-import lombok.Setter;
 import org.springframework.stereotype.Service;
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Detail;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Detail;
 import ric.masters.carservice.repository.CarRepository;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class CarServiceImpl implements CarService {
@@ -41,6 +39,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car createCar(Car createdCar) {
+
         return carRepository.save(createdCar);
     }
 
@@ -65,6 +64,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Detail updateDetailOnCar(long carId, String detailNumber, Detail newDetail) {
+        if (detailNumber == null || detailNumber.isEmpty() && !detailNumber.chars().allMatch(c -> Character.isDigit(c) || Character.isAlphabetic(c)))
+            throw new RuntimeException();
         Car updatedCar = carRepository.getCarById(carId).orElseThrow();
         for (Detail detail : updatedCar.getDetails()) {
             if (detail.getDetailNumber().equals(detailNumber)) {

@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Detail;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Detail;
 import ric.masters.carservice.repository.CarRepository;
 import ric.masters.carservice.service.CarServiceImpl;
 

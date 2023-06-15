@@ -1,4 +1,4 @@
-package ric.masters.carservice.entiry;
+package ric.masters.carservice.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,15 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "detail")
+@Table(name = "details")
 public class Detail {
 
-    @Column(name = "id")
+    @Column(name = "id",nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @NotNull
-    @Column(name = "detail_number")
+    @Column(name = "detail_number",nullable = false)
     private String detailNumber;
 }

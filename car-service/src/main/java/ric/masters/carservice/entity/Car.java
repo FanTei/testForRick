@@ -1,4 +1,4 @@
-package ric.masters.carservice.entiry;
+package ric.masters.carservice.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -12,24 +12,24 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "car")
+@Table(name = "cars")
 public class Car {
-
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     @NotNull
-    @Column(name = "vin_code")
+    @Column(name = "vin_code", nullable = false)
     private String vinCode;
 
     @NotNull
-    @Column(name = "state_number")
+    @Column(name = "state_number", nullable = false)
     private String stateNumber;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "car_id")
     private Set<Detail> details;
 
@@ -47,5 +47,15 @@ public class Car {
         this.vinCode = vinCode;
         this.stateNumber = stateNumber;
         this.details = new HashSet<>();
+    }
+
+    public Car(long id, String vinCode, String stateNumber, String brand,
+               String model, String yearToProd) {
+        this.id = id;
+        this.vinCode = vinCode;
+        this.stateNumber = stateNumber;
+        this.brand = brand;
+        this.model = model;
+        this.yearToProd = yearToProd;
     }
 }

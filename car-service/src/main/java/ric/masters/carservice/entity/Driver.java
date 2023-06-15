@@ -1,12 +1,12 @@
-package ric.masters.carservice.entiry;
+package ric.masters.carservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.aop.target.LazyInitTargetSource;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,29 +15,32 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "driver")
+@Table(name = "drivers")
 public class Driver {
+
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "name")
+
+    @Column(name = "name",nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname",nullable = false)
     private String surname;
 
-    @Column(name = "lastname")
+    @Column(name = "lastname",nullable = false)
     private String lastname;
 
-    @Column(name = "pasport")
+    @Column(name = "pasport",nullable = false)
     private String passport;
 
     @Column(name = "driver_license")
     private String driverLicense;
 
-    @Column(name = "birthday")
-    private Date birthday;
+    @Column(name = "birthday",nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Calendar birthday;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "driver_id")

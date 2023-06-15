@@ -1,16 +1,14 @@
 package service;
 
-import org.checkerframework.checker.index.qual.PolyUpperBound;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Driver;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Driver;
 import ric.masters.carservice.repository.CarRepository;
 import ric.masters.carservice.repository.DriverRepository;
-import ric.masters.carservice.service.CarServiceImpl;
 import ric.masters.carservice.service.DriverServiceImpl;
 
 import java.util.ArrayList;

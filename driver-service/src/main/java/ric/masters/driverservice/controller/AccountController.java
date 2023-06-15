@@ -14,7 +14,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PutMapping("/account/put/{driverId}")
+    @PutMapping("/put/{driverId}")
     public ResponseEntity<?> put(@PathVariable long driverId,
                                  @RequestParam(required = true, name = "countType") String countType,
                                  @RequestParam(required = true, name = "count") double count) {

@@ -2,18 +2,29 @@ package ric.masters.driverservice.service;
 
 import org.springframework.stereotype.Service;
 import ric.masters.driverservice.entity.Account;
+import ric.masters.driverservice.entity.DtoDriver;
 import ric.masters.driverservice.repository.AccountRepository;
+import ric.masters.driverservice.service.client.DriverFeignClient;
 
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
+    private final DriverFeignClient driverFeignClient;
 
-    public AccountServiceImpl(AccountRepository accountRepository) {
+
+    public AccountServiceImpl(AccountRepository accountRepository, DriverFeignClient driverFeignClient) {
         this.accountRepository = accountRepository;
+        this.driverFeignClient = driverFeignClient;
     }
 
     @Override
     public Account putCountInRed(long driverId, double countRed) {
+        if (accountRepository.getAccountByDriverId(driverId).isEmpty()) {
+            DtoDriver driver = driverFeignClient.getDriver(driverId);
+            if (driverFeignClient.getDriver(driverId) != null) accountRepository.save(new Account(0, driverId));
+            else throw new RuntimeException();
+        }
+
         Account account = accountRepository.getAccountByDriverId(driverId).orElseThrow();
         account.setCountInRed(account.getCountInRed() + countRed);
         accountRepository.save(account);

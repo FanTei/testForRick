@@ -1,12 +1,11 @@
 package ric.masters.carservice.service;
 
 
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Detail;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Detail;
 
 
 import java.util.List;
-import java.util.Set;
 
 public interface CarService {
     Car getCarByCarId(long carId);

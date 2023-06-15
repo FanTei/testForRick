@@ -1,11 +1,15 @@
 package ric.masters.carservice.service;
 
-import lombok.Setter;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Driver;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Driver;
 import ric.masters.carservice.repository.DriverRepository;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +36,12 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public List<Driver> getDriversByBirthday(Date birthday) {
-        List<Driver> drivers = driverRepository.getDriverByBirthday(birthday);
+    public List<Driver> getDriversByBirthday(String birthday) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = dateFormat.parse(birthday);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        List<Driver> drivers = driverRepository.getDriverByBirthday(calendar);
         if (drivers.size() == 0) throw new RuntimeException();
         return drivers;
     }
@@ -60,7 +68,7 @@ public class DriverServiceImpl implements DriverService {
         updateDriver.setPassport(newDriver.getPassport());
         updateDriver.setDriverLicense(newDriver.getDriverLicense());
         updateDriver.setBirthday(newDriver.getBirthday());
-        driverRepository.save(newDriver);
+        driverRepository.save(updateDriver);
         return newDriver;
     }
 

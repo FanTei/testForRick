@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ric.masters.driverservice.entity.DtoDriver;
 import org.springframework.cloud.openfeign.FeignClient;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface DriverFeignClient {
 
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{birthDay}",
+            value = "birthDay/{birthDay}",
             consumes = "application/json"
     )
     List<DtoDriver> getAllDriversByDate(@PathVariable String birthDay);

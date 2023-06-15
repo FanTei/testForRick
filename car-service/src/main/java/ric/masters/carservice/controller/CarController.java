@@ -1,14 +1,14 @@
 package ric.masters.carservice.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ric.masters.carservice.entiry.Car;
-import ric.masters.carservice.entiry.Detail;
+import ric.masters.carservice.entity.Car;
+import ric.masters.carservice.entity.Detail;
 import ric.masters.carservice.service.CarService;
 
 import java.util.List;
+
 @RestController
 @RequestMapping(value = "/car")
 public class CarController {
@@ -26,33 +26,12 @@ public class CarController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
     }
 
-    @GetMapping(value = "id/{carId}")
+    @GetMapping(value = "/{carId}")
     public ResponseEntity<?> getCarByCarId(@PathVariable long carId) {
         try {
             return new ResponseEntity<>(carService.getCarByCarId(carId), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping(value = "vin/{vinCode}")
-    public ResponseEntity<?> getCarByVinCode(@PathVariable String vinCode) {
-        try {
-            return new ResponseEntity<>(carService.getCarByVinCode(vinCode), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    @GetMapping(value = "state/{stateNumber}")
-    public ResponseEntity<?> getCarByStateNumber(@PathVariable String stateNumber) {
-        try {
-            return new ResponseEntity<>(carService.getCarByStateNumber(stateNumber), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -73,7 +52,6 @@ public class CarController {
         return new ResponseEntity<>(carService.createCar(car), HttpStatus.CREATED);
     }
 
-
     @PutMapping("/{carId}")
     public ResponseEntity<?> updateCar(@PathVariable long carId, @RequestBody Car car) {
         try {
@@ -84,7 +62,7 @@ public class CarController {
     }
 
     @PutMapping("/{carId}/{detailNumber}")
-    public ResponseEntity<?> updateDetailOnCar(@PathVariable long carId, String detailNumber, @RequestBody Detail newDetail) {
+    public ResponseEntity<?> updateDetailOnCar(@PathVariable long carId, @PathVariable String detailNumber, @RequestBody Detail newDetail) {
         try {
             return new ResponseEntity<>(carService.updateDetailOnCar(carId, detailNumber, newDetail), HttpStatus.OK);
         } catch (Exception e) {

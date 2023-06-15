@@ -13,3 +13,4 @@ server:
 springdoc:
   swagger-ui:
     operations-sorter: method
+    path: /swagger-ui.html
